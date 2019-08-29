@@ -1,16 +1,62 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="card text-center">
+
   <div class="card-header" style="background-color: #e3f2fd; color: 000034;">
     Classroom Details
   </div>
+
   <div class="card-body">
-    <h5 class="card-title" style="color: 000034;">{{classroom.name}} {{classroom.subject}}</h5>
-    <p class="card-text" style="color: 000034;">{{classroom.year}}</p>
-    <a href="{% url 'classroom-update' classroom.id %}" class="btn" style="background-color: #000034; color: white;">Update</a>
-    <a href="{% url 'classroom-delete' classroom.id %}" class="btn" style="background-color: #FFA500; color: #000034;">Delete</a>
-  </div>
-</div>
+    <h5 class="card-title" style="color: 000034;">Name: {{classroom.name}}<br>Subject: {{classroom.subject}}</h5>
+    <p class="card-text" style="color: 000034;">Year: {{classroom.year}}</p>
+
+    {# table #}
+    <div class="container">
+      <table class="table table-dark table-striped">
+        <thead> <!-- Table Head -->
+          <tr> <!-- Table Row -->
+            <th scope="col">Name</th>
+            <th cope="col">date of birth</th>
+            <th cope="col">gender</th>
+            <th cope="col">exam grade</th>
+          </tr>
+        </thead>
+
+        <tbody> <!-- Table Body -->
+
+        {% for item in students %}
+
+
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.date_of_birth}}</td>
+            <td>{{item.gender}}</td>
+            <td>{{item.exam_grade}}</td>
+          </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+      </table>
+
+      {% if request.user == classroom.teacher  %}
+
+
+      <div class="col-md-12">
+        <a href="{% url 'classroom-update' classroom.id %}" class="btn btn-outline-primary btn-block">Update</a>
+
+        <a href="{% url 'classroom-delete' classroom.id %}" class="btn btn-outline-primary btn-block">Delete</a>
+
+        <a href="{% url 'student-create' classroom.id %}" class="btn btn-outline-primary btn-block">Add Student</a>
+      </div>
+
+
+      {% endif %}
+
+    
 
 {% endblock content %}
+
