@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h3>{{r.name}}</h3>
+	<p>Height: {{r.height}}</p>
+	<p>Abilities: </p>
+	<ul>
+		{% for ability in r.abilities %}
+			<li>{{ability.ability.name}}</li>
+		{% endfor %}
+	</ul>
+
+	<p>Type: </p>
+	<ul>
+		{% for type in r.types %}
+			<li>{{type.type.name}}</li>
+		{% endfor %}
+	</ul>
+{% endblock content %}

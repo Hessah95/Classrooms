@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for result in response.results %}
+		{{result.name}}
+		<form action="{% url 'detail' %}">
+			<input type="hidden" value="{{result.url}}" name="detail">
+			<button class="btn btn-primary" type="submit">read more..</button>
+			<br>
+		</form>
+	{% endfor %}
+	
+	{% if response.previous %}
+		<form action="{% url 'api-list' %}">
+		<input type="hidden" value="{{response.previous}}" name="p">
+		<button class="btn btn-primary" type="submit">Previous</button>
+		<br>
+		</form>
+	{% endif %}
+
+	{% if response.next %}
+		<form action="{% url 'api-list' %}">
+		<input type="hidden" value="{{response.next}}" name="n">
+		<button class="btn btn-primary" type="submit">Next</button>
+		<br>
+		</form>
+	{% endif %}
+	
+
+	
+
+{% endblock content %}
